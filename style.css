@@ -1,21 +1,21 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: #f4f6f9;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #000000;
 }
 
 b {
   display: block;
   margin-top: 15px;
   margin-bottom: 5px;
-  color: #0066cc;
-  border-bottom: 2px solid #0066cc;
-  padding-bottom: 3px;
+  color: #000000;
+  font-size: 1.05em;
 }
 
 .container {
@@ -25,10 +25,9 @@ b {
 
 .form-box, .preview-box {
   flex: 1;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   padding: 20px;
-  border-radius: 8px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .preview-box {
@@ -36,7 +35,6 @@ b {
   white-space: pre-wrap;
   font-family: "Times New Roman", Times, serif;
   line-height: 1.4;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 label {
@@ -51,28 +49,28 @@ input, select, textarea {
   padding: 8px;
   margin-top: 4px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 0;
 }
 
 button {
   cursor: pointer;
-  border: none;
-  border-radius: 4px;
+  border: 1px solid #000000;
+  border-radius: 0;
   font-weight: bold;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .btn-add {
-  background: #28a745;
-  color: white;
   margin-top: 15px;
   padding: 10px;
   width: 100%;
 }
 
 .btn-print {
-  background: #0066cc;
-  color: white;
   margin-top: 20px;
   padding: 12px;
   width: 100%;
@@ -80,17 +78,16 @@ button {
 }
 
 .section-group {
-  border: 1px dashed #aaa;
+  border: 1px solid #000000;
   padding: 12px;
   margin-top: 10px;
-  border-radius: 6px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 
 .form-subgroup {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid #000000;
 }
 
 .hidden {
@@ -100,27 +97,27 @@ button {
 .entry-list {
   max-height: 200px;
   overflow-y: auto;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   padding: 5px;
   margin-top: 10px;
-  background: #fafafa;
+  background: #ffffff;
 }
 
 .entry-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
+  background: #ffffff;
   padding: 6px 10px;
   margin-bottom: 5px;
-  border: 1px solid #eee;
-  border-radius: 4px;
+  border: 1px solid #000000;
   font-size: 0.85em;
 }
 
 .btn-remove {
-  background: #dc3545;
-  color: white;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
   padding: 3px 8px;
   font-size: 0.8em;
 }
@@ -134,7 +131,6 @@ button {
   }
   .preview-box {
     border: none;
-    box-shadow: none;
     background: white;
     font-size: 12pt;
     padding: 0;

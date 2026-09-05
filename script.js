@@ -1,4 +1,3 @@
-// Poprawione tablice stopni
 const OPCJE_STOPNIE_SKROCONE = [
   { val: "", txt: "-- Brak stopnia --" },
   { val: "mł.", txt: "mł. (młodzik)" },
@@ -220,7 +219,7 @@ function odswiezListewpisow() {
   }
 
   if (czyPuste) {
-    listaEl.innerHTML = '<i style="color:#888; font-size:0.85em;">Brak dodanych punktów.</i>';
+    listaEl.innerHTML = '<span>Brak dodanych punktów.</span>';
   }
 }
 
@@ -257,9 +256,7 @@ function aktualizujPodglad() {
 ${jednostkaNadrzedna ? `<div>${jednostkaNadrzedna}</div>` : ''}
 <div>${jednostka}</div>
 
-<h2 style="text-align: center; margin: 25px 0 15px 0;">ROZKAZ ${nrRozkazu}</h2>
-
-<hr style="border: 0.5px solid #000; margin-bottom: 20px;">
+<h2 style="text-align: center; margin: 25px 0 25px 0;">ROZKAZ ${nrRozkazu}</h2>
 
 ${trescRozkazuHTML}
 
