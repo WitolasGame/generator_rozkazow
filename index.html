@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Generator Rozkazów ZHP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Generator Rozkazu ZHP</h1>
+
+  <div class="container">
+    <!-- PANEL FORMULARZA -->
+    <div class="form-box">
+      <b>1. Nagłówek rozkazu</b>
+      
+      <label>Jednostka nadrzędna (np. Hufiec)</label>
+      <input type="text" id="jednostkaNadrzedna" value="Hufiec ZHP Warszawa-Centrum">
+
+      <label>Nazwa Jednostki (wydającej rozkaz)</label>
+      <input type="text" id="jednostka" value="13 Drużyna Harcerska „Knieja”">
+
+      <label>Miejscowość i Data</label>
+      <input type="text" id="data" value="Warszawa, 12.10.2026 r.">
+
+      <label>Numer Rozkazu</label>
+      <input type="text" id="nrRozkazu" value="L. 8/2026">
+
+      <b>2. Dodaj punkt do rozkazu</b>
+      <div class="section-group">
+        <label>Co chcesz dodać do rozkazu?</label>
+        <select id="actionType" onchange="zmienFormularz()">
+          <option value="mianowanie">Mianowanie na funkcję (Pkt 3)</option>
+          <option value="zwolnienie">Zwolnienie z funkcji (Pkt 4)</option>
+          <option value="otwarcieProby">Otwarcie próby na stopień (Pkt 2)</option>
+          <option value="zamkniecieProby">Zamknięcie próby na stopień (Pkt 5)</option>
+          <option value="inny">Inny wpis / Tekst swobodny</option>
+        </select>
+
+        <!-- FORMULARZ: MIANOWANIE -->
+        <div id="formMianowanie" class="form-subgroup">
+          <label>Stopień</label>
+          <select id="mianowanieStopien" class="select-stopien"></select>
+
+          <label>Imię i Nazwisko</label>
+          <input type="text" id="mianowanieOsoba" placeholder="np. Jan Kowalski">
+
+          <label>Funkcja</label>
+          <select id="mianowanieFunkcja" class="select-funkcja"></select>
+          <input type="text" id="mianowanieFunkcjaInna" placeholder="lub wpisz własną funkcję..." class="hidden">
+        </div>
+
+        <!-- FORMULARZ: ZWOLNIENIE -->
+        <div id="formZwolnienie" class="form-subgroup hidden">
+          <label>Stopień</label>
+          <select id="zwolnienieStopien" class="select-stopien"></select>
+
+          <label>Imię i Nazwisko</label>
+          <input type="text" id="zwolnienieOsoba" placeholder="np. Piotr Nowak">
+
+          <label>Pełniona funkcja</label>
+          <select id="zwolnienieFunkcja" class="select-funkcja"></select>
+          <input type="text" id="zwolnienieFunkcjaInna" placeholder="lub wpisz własną funkcję..." class="hidden">
+
+          <label>Podziękowanie</label>
+          <select id="zwolnienieDziekowanie">
+            <option value="tak">Tak („..., dziękując za dotychczasową służbę.”)</option>
+            <option value="nie">Nie</option>
+          </select>
+        </div>
+
+        <!-- FORMULARZ: OTWARCIE PRÓBY -->
+        <div id="formOtwarcieProby" class="form-subgroup hidden">
+          <label>Aktualny stopień / miano</label>
+          <select id="otwarcieStopienAktualny" class="select-stopien"></select>
+
+          <label>Imię i Nazwisko</label>
+          <input type="text" id="otwarcieOsoba" placeholder="np. Adam Zieliński">
+
+          <label>Otwierany stopień</label>
+          <select id="otwarcieStopienOtwierany" class="select-stopien-pelny"></select>
+
+          <label>Opiekun próby (opcjonalnie)</label>
+          <input type="text" id="otwarcieOpiekun" placeholder="np. pwd. Anna Nowak HO">
+        </div>
+
+        <!-- FORMULARZ: ZAMKNIĘCIE PRÓBY -->
+        <div id="formZamkniecieProby" class="form-subgroup hidden">
+          <label>Aktualny stopień</label>
+          <select id="zamkniecieStopienAktualny" class="select-stopien"></select>
+
+          <label>Imię i Nazwisko</label>
+          <input type="text" id="zamkniecieOsoba" placeholder="np. Jan Kowalski">
+
+          <label>Zamykany stopień</label>
+          <select id="zamkniecieStopienZamykany" class="select-stopien-pelny"></select>
+
+          <label>Wynik próby</label>
+          <select id="zamkniecieWynik">
+            <option value="pozytywny">Pozytywny (przyznanie stopnia)</option>
+            <option value="przerwanie">Przerwanie próby (nieprzyznanie stopnia)</option>
+          </select>
+        </div>
+
+        <!-- FORMULARZ: INNY WPIS -->
+        <div id="formInny" class="form-subgroup hidden">
+          <label>Wybierz punkt rozkazu</label>
+          <select id="innyKategoria">
+            <option value="1">1. Wyjątki z rozkazów</option>
+            <option value="2">2. Uchwały, zarządzenia, decyzje</option>
+            <option value="3">3. Mianowania</option>
+            <option value="4">4. Zwolnienia</option>
+            <option value="5">5. Stopnie, sprawności, odznaki</option>
+            <option value="6">6. Pochwały</option>
+            <option value="7">7. Nagany</option>
+          </select>
+          <label>Treść wpisu</label>
+          <textarea id="innyTresc" rows="3" placeholder="Wpisz własną treść punktu..."></textarea>
+        </div>
+
+        <button class="btn-add" type="button" onclick="dodajPunkt()">+ Dodaj wpis do rozkazu</button>
+      </div>
+
+      <b>3. Lista dodanych wpisów</b>
+      <div id="listaWpisow" class="entry-list"></div>
+
+      <b>4. Podpis</b>
+      <label>Podpis wydającego rozkaz</label>
+      <input type="text" id="podpis" value="pwd. Jan Kowalski HO">
+
+      <button onclick="window.print()" class="btn-print">Drukuj / Zapisz do PDF</button>
+    </div>
+
+    <!-- PANEL PODGLĄDU -->
+    <div class="preview-box" id="podglad"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
