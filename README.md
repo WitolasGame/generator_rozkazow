@@ -19,7 +19,7 @@ Aby zainstalować projekt, wykonaj poniższe kroki:
 
 ## Użytkowanie
 
-Po otworzeniu strony, możesz po prostu kożystać, wszystko wydaje mi się indtuicyjne
+Po otworzeniu strony, możesz po prostu korzystać, wszystko wydaje mi się intuicyjne
 
 ## Współpraca
 
@@ -29,4 +29,6 @@ Projekt jest otwarty dla współpracy. Aby przyczynić się do rozwoju projektu,
 
 ## Licencja
 
-Kożystaj ile chcesz i jak chcesz, miło by było gdybyś w swoich implementacjach zaznaczył, że autorem orginału byłem ja (możesz dać linka do tego githuba po prostu).
+Korzystaj ile chcesz i jak chcesz, miło by było gdybyś w swoich projektach korzystających z tego kodu zaznaczył, że autorem orginału byłem ja (możesz dać linka do tego githuba po prostu).
+
+Niech moc będzie z tobą!
