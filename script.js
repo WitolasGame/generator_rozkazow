@@ -16,24 +16,19 @@ const OPCJE_STOPNIE_SKROCONE = [
 ];
 
 const OPCJE_STOPNIE_PELNE = [
-  { val: "młodzika", txt: "młodzika" },
-  { val: "ochotniczki", txt: "ochotniczki" },
-  { val: "wywiadowcy", txt: "wywiadowcy" },
-  { val: "tropicielki", txt: "tropicielki" },
-  { val: "odkrywcy", txt: "odkrywcy" },
-  { val: "pionierki", txt: "pionierki" },
-  { val: "ćwika", txt: "ćwika" },
-  { val: "samarytanki", txt: "samarytanki" },
-  { val: "harcerza orlego", txt: "harcerza orlego" },
-  { val: "harcerki orlej", txt: "harcerki orlej" },
-  { val: "harcerza Rzeczypospolitej", txt: "harcerza Rzeczypospolitej" },
-  { val: "harcerki Rzeczypospolitej", txt: "harcerki Rzeczypospolitej" },
-  { val: "przewodnika", txt: "przewodnika" },
-  { val: "przewodniczki", txt: "przewodniczki" },
-  { val: "podharcmistrza", txt: "podharcmistrza" },
-  { val: "podharcmistrzyni", txt: "podharcmistrzyni" },
-  { val: "harcmistrza", txt: "harcmistrza" },
-  { val: "harcmistrzyni", txt: "harcmistrzyni" }
+  { val: "mł.", txt: "mł. (młodzik)" },
+  { val: "och.", txt: "och. (ochotniczka)" },
+  { val: "wyw.", txt: "wyw. (wywiadowca)" },
+  { val: "trop.", txt: "trop. (tropicielka)" },
+  { val: "odkr.", txt: "odkr. (odkrywca)" },
+  { val: "pion.", txt: "pion. (pionierka)" },
+  { val: "ćw.", txt: "ćw. (ćwik)" },
+  { val: "sam.", txt: "sam. (samarytanka)" },
+  { val: "HO", txt: "HO (harcerz orli / harcerka orla)" },
+  { val: "HR", txt: "HR (harcerz Rzeczypospolitej / harcerka Rzeczypospolitej)" },
+  { val: "pwd.", txt: "pwd. (przewodnik / przewodniczka)" },
+  { val: "phm.", txt: "phm. (podharcmistrz / podharcmistrzyni)" },
+  { val: "hm.", txt: "hm. (harcmistrz / harcmistrzyni)" }
 ];
 
 const OPCJE_FUNKCJE = [
@@ -60,7 +55,7 @@ const OPCJE_FUNKCJE = [
   { val: "INNA", txt: "-- Wpisz własną funkcję --" }
 ];
 
-const rozkazData = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [] };
+let rozkazData = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [] };
 
 const nazwyKategorii = {
   1: "1. Wyjątki z rozkazów",
@@ -266,6 +261,53 @@ Czuwaj!<br><br>
 ${podpis}
 </div>
   `;
+}
+
+function zapiszDoPliku() {
+  const stan = {
+    jednostkaNadrzedna: document.getElementById('jednostkaNadrzedna').value,
+    jednostka: document.getElementById('jednostka').value,
+    data: document.getElementById('data').value,
+    nrRozkazu: document.getElementById('nrRozkazu').value,
+    podpis: document.getElementById('podpis').value,
+    rozkazData: rozkazData
+  };
+
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(stan, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", `rozkaz_${document.getElementById('nrRozkazu').value || 'szkic'}.json`);
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+
+function wczytajZPliku(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const stan = JSON.parse(e.target.result);
+      
+      if (stan.jednostkaNadrzedna !== undefined) document.getElementById('jednostkaNadrzedna').value = stan.jednostkaNadrzedna;
+      if (stan.jednostka !== undefined) document.getElementById('jednostka').value = stan.jednostka;
+      if (stan.data !== undefined) document.getElementById('data').value = stan.data;
+      if (stan.nrRozkazu !== undefined) document.getElementById('nrRozkazu').value = stan.nrRozkazu;
+      if (stan.podpis !== undefined) document.getElementById('podpis').value = stan.podpis;
+      if (stan.rozkazData !== undefined) rozkazData = stan.rozkazData;
+
+      odswiezListewpisow();
+      aktualizujPodglad();
+      alert('Stan rozkazu został pomyślnie wczytany.');
+    } catch (err) {
+      alert('Błąd podczas odczytu pliku JSON.');
+      console.error(err);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
 }
 
 document.querySelectorAll('#jednostkaNadrzedna, #jednostka, #data, #nrRozkazu, #podpis').forEach(el => {

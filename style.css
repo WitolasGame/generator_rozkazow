@@ -62,19 +62,13 @@ button {
   font-weight: bold;
   background-color: #000000;
   color: #ffffff;
-}
-
-.btn-add {
-  margin-top: 15px;
+  width: 100%;
   padding: 10px;
-  width: 100%;
+  margin-top: 10px;
 }
 
-.btn-print {
-  margin-top: 20px;
-  padding: 12px;
-  width: 100%;
-  font-size: 1.05em;
+button:hover {
+  background-color: #333333;
 }
 
 .section-group {
@@ -120,10 +114,41 @@ button {
   border: 1px solid #000000;
   padding: 3px 8px;
   font-size: 0.8em;
+  width: auto;
+  margin-top: 0;
+}
+
+.btn-file-label {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid #000;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+.btn-file-label:hover {
+  background-color: #333333;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  body {
+    margin: 10px;
+  }
+  .form-box, .preview-box {
+    padding: 10px;
+  }
 }
 
 @media print {
-  .form-box, button, h1 {
+  .form-box, button, h1, .btn-file-label {
     display: none !important;
   }
   .container {
